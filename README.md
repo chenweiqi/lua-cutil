@@ -22,8 +22,8 @@ there is an example in the 'tests' dir.
 $ /usr/local/bin/lua
 Lua 5.3.2  Copyright (C) 1994-2015 Lua.org, PUC-Rio
 > dofile("tests/sample.lua")
-lua version:    ssfoo明天a你好foo23333
-cutil version:  ssfoo明天a你好foo23333
+lua version:    ssfoo鏄庡ぉa浣犲ソfoo23333
+cutil version:  ssfoo鏄庡ぉa浣犲ソfoo23333
 efficiency comparison: 
 test lua version:       5.53
 test cutil version:     0.06
