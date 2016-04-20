@@ -2,7 +2,7 @@
 Lua CUtil is a util library for Lua
 
 ## Build
-make sure lua was installed in you linux, and the following command 'make install' is just match lua 5.3, so lua 5.3 is suggested.
+make sure lua was installed in your linux, and the following command 'make install' is just match lua 5.3, so lua 5.3 is suggested.
 ```plain
 $ make all
 $ make install

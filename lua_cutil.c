@@ -30,6 +30,9 @@
 
 #define uchar(c) ((unsigned char)(c))
 
+#define isdigit(s) (s>=48 && s<=57)
+#define isalpha(s) ((s>=65 && s<=90) || (s>=97 && s<=122))
+
 
 /* filter special characters, only keep Chinese characters, English letters and numbers.
  * (support for utf8)
@@ -42,10 +45,10 @@ static int filter_spec_chars(lua_State *L)
 	luaL_Buffer b;
 	char *p;
 	const char* src = luaL_checklstring(L, 1, &srcl);
-	char* tmp = (char *)malloc(sizeof(char) * (srcl+1));
+	char* tmp = (char *)malloc(sizeof(char) * srcl);
 	for ( i=0; i<srcl; i++) {
 		unsigned char s = uchar(src[i]);
-		if ((s>=48 && s<=57) || (s>=65 && s<=90) || (s>=97 && s<=122)) {
+		if (isdigit(s) || isalpha(s)) {
 			tmp[l++] = s;
 			continue;
 		}
