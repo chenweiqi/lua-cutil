@@ -10,7 +10,11 @@ function filter_spec_chars(s)
 		elseif c>=228 and c<=233 then
 			local c1 = string.byte(s,k+1)
 			local c2 = string.byte(s,k+2)
-			if c1 and c2 and (c1>=128 and c1<=191) and (c2>=128 and c2<=191) then
+			if not c1 or not c2 then break end
+			local a1,a2,a3,a4 = 128,191,128,191
+			if c == 228 then a1 = 184 end
+			if c == 233 then a2, a4 = 190, 165 end
+			if c1>=a1 and c1<=a2 and c2>=a3 and c2<=a4 then
 				k = k + 2
 				table.insert(ss, string.char(c,c1,c2))
 			end

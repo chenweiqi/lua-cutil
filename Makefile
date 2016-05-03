@@ -68,3 +68,6 @@ install: $(TARGET)
 
 clean:
 	rm -f *.o $(TARGET)
+
+test:
+	$(LUA_BIN_DIR)/lua -e "io.stdout:setvbuf 'no'" "tests/sample.lua"
