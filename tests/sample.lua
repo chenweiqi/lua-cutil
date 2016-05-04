@@ -10,13 +10,15 @@ function filter_spec_chars(s)
 		elseif c>=228 and c<=233 then
 			local c1 = string.byte(s,k+1)
 			local c2 = string.byte(s,k+2)
-			if not c1 or not c2 then break end
-			local a1,a2,a3,a4 = 128,191,128,191
-			if c == 228 then a1 = 184 end
-			if c == 233 then a2, a4 = 190, 165 end
-			if c1>=a1 and c1<=a2 and c2>=a3 and c2<=a4 then
-				k = k + 2
-				table.insert(ss, string.char(c,c1,c2))
+			if c1 and c2 then
+				local a1,a2,a3,a4 = 128,191,128,191
+				if c == 228 then a1 = 184
+				elseif c == 233 then a2,a4 = 190,165
+				end
+				if c1>=a1 and c1<=a2 and c2>=a3 and c2<=a4 then
+					k = k + 2
+					table.insert(ss, string.char(c,c1,c2))
+				end
 			end
 		end
 	end
@@ -36,7 +38,7 @@ for k = 1,100000 do
 	filter_spec_chars(ss)
 end
 t1 = os.clock()
-print("test lua version: ", t1-t) -- 5.78
+print("test lua version: ", t1-t) -- 5.61
 
 t = os.clock()
 for k = 1,100000 do
