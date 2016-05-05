@@ -81,13 +81,14 @@ static int filter_spec_chars(lua_State *L)
 
 	for ( i=0; i<srcl; i++) {
 		unsigned char s = uchar(src[i]);
-		if (isdigit(s) || isalpha(s)) {
-			tmp[l++] = s;
-			continue;
-		}
-
-		if (i<srcl-2) {
-			if (s>=228 && s<=233) {
+		if (s<192) {
+			if (isdigit(s) || isalpha(s)) {
+				tmp[l++] = s;
+			}
+		} else if (s<224) {
+			i += 1;
+		} else if (s<240) {
+			if (s>=228 && s<=233 && i<srcl-2) {
 				unsigned char s1 = uchar(src[i+1]);
 				unsigned char s2 = uchar(src[i+2]); 
 				int a1=128, a2=191, a3=128, a4=191;
@@ -101,9 +102,15 @@ static int filter_spec_chars(lua_State *L)
 					tmp[l++] = s;
 					tmp[l++] = s1;
 					tmp[l++] = s2;
-					i += 2;
 				}
 			}
+			i += 2;
+		} else if (s<248) {
+			i += 3;
+		} else if (s<252) {
+			i += 4;
+		} else if (s<254) {
+			i += 5;
 		}
 	}
 
