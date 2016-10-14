@@ -18,7 +18,7 @@ function filter_spec_chars(s)
 				if c1 and c2 then
 					local a1,a2,a3,a4 = 128,191,128,191
 					if c == 228 then a1 = 184
-					elseif c == 233 then a2,a4 = 190,c1 ~= 190 and 191 or 165
+					elseif c == 233 then a2,a4 = 190,165
 					end
 					if c1>=a1 and c1<=a2 and c2>=a3 and c2<=a4 then
 						table.insert(ss, string.char(c,c1,c2))
@@ -38,7 +38,7 @@ function filter_spec_chars(s)
 end
 
 
-ss = '$s%sfoo"a"你好xiao银仔y、，。～！＠＃￥％……＆×（）｛｝｜：“《》？y、，。～！＠＃￥％……＆×（）｛｝｜：“《》？"foo%%23333|'
+ss = '$s%sfoo"明天"a"你好银y、，。～！＠＃￥％……＆×（）｛｝｜：“《》？"foo%%23333|'
 
 print("lua version: ", filter_spec_chars(ss))
 print("cutil version: ", cutil.filter_spec_chars(ss))

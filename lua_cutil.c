@@ -96,7 +96,7 @@ static int filter_spec_chars(lua_State *L)
 					a1 = 184;
 				} else if (s == 233) {
 					a2 = 190;
-					a4 = 165;
+					a4 = s1!=190? 191: 165;
 				}
 				if (s1>=a1 && s1<=a2 && s2>=a3 && s2<=a4){
 					tmp[l++] = s;
