@@ -2,15 +2,18 @@ local cutil = require "cutil"
 
 function filter_spec_chars(s)
 	local ss = {}
-	for k = 1, #s do
+	local k = 1
+	while true do
+		if k > #s then break end
 		local c = string.byte(s,k)
 		if not c then break end
 		if c<192 then
 			if (c>=48 and c<=57) or (c>= 65 and c<=90) or (c>=97 and c<=122) then
 				table.insert(ss, string.char(c))
 			end
-		elseif c<224 then
 			k = k + 1
+		elseif c<224 then
+			k = k + 2
 		elseif c<240 then
 			if c>=228 and c<=233 then
 				local c1 = string.byte(s,k+1)
@@ -25,13 +28,13 @@ function filter_spec_chars(s)
 					end
 				end
 			end
-			k = k + 2
-		elseif c<248 then
 			k = k + 3
-		elseif c<252 then
+		elseif c<248 then
 			k = k + 4
-		elseif c<254 then
+		elseif c<252 then
 			k = k + 5
+		elseif c<254 then
+			k = k + 6
 		end
 	end
 	return table.concat(ss)
